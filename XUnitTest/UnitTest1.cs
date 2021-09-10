@@ -15,7 +15,16 @@ namespace XUnitTest
         {
             Serializer serializer = new Serializer();
 
-            serializer.SerializeData(dataTest, path);
+            try
+            {
+                serializer.SerializeData(dataTest, path);
+            }
+            catch (Exception e)
+            {
+                Assert.True(false);
+            }
+
+            Assert.True(true);
         }
 
         [Fact]
@@ -24,20 +33,25 @@ namespace XUnitTest
             PlayerData data = new PlayerData();
             Deserializer deserializer = new Deserializer();
 
-            data = deserializer.DeserializeData(path);
+            try 
+            {
+                data = deserializer.DeserializeData(path);
+            }
+            catch (Exception e)
+            {
+                Assert.True(false);
+            }
+
+            Assert.True(true);
         }
 
         [Fact]
         public void IsThereCreatedFileTest()
         {
-            bool cond = true;
+            Serializer serializer = new Serializer();
+            serializer.SerializeData(dataTest, path);
 
-            if (!File.Exists(path))
-            {
-                cond = false;
-            }
-
-            Assert.True(cond);
+            Assert.True(File.Exists(path));
         }
 
         [Fact]
