@@ -15,16 +15,10 @@ namespace XUnitTest
         {
             Serializer serializer = new Serializer();
 
-            try
-            {
-                serializer.SerializeData(dataTest, path);
-            }
-            catch (Exception e)
-            {
-                Assert.True(false);
-            }
+            serializer.SerializeData(dataTest, path);
 
-            Assert.True(true);
+
+            Assert.True(File.Exists(path));
         }
 
         [Fact]
@@ -33,16 +27,11 @@ namespace XUnitTest
             PlayerData data = new PlayerData();
             Deserializer deserializer = new Deserializer();
 
-            try 
-            {
-                data = deserializer.DeserializeData(path);
-            }
-            catch (Exception e)
-            {
-                Assert.True(false);
-            }
+            data = deserializer.DeserializeData(path);
 
-            Assert.True(true);
+            Assert.Equal(dataTest.playerName, data.playerName);
+            Assert.Equal(dataTest.level, data.level);
+            Assert.Equal(dataTest.gold, data.gold);
         }
 
         [Fact]
